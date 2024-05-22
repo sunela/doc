@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# mkgallery - Generate FIG file with all the screenshots from fw/tests/
+#
+# This work is licensed under the terms of the MIT License.
+# A copy of the license can be found in the file LICENSE.MIT
+#
+
+cat <<EOF
+#FIG 3.2  Produced by xfig version 3.2.8b
+Landscape
+Center
+Metric
+A4
+100.00
+Single
+-2
+1200 2
+EOF
+
+ox=450
+oy=450
+w=964
+h=1112
+dx=1125
+dy=1350
+i=0
+for n in ../fw/tests/*.png; do
+	ix=`expr $i % 8`
+	iy=`expr $i / 8`
+	x0=`expr $ox + $ix \* $dx`
+	y0=`expr $oy + $iy \* $dy`
+	x1=`expr $x0 + $w - 1`
+	y1=`expr $y0 + $h - 1`
+cat <<EOF
+2 5 0 1 0 -1 50 -1 -1 0.000 0 0 -1 0 0 5
+	0 $n
+	$x0 $y0 $x1 $y0 $x1 $y1 $x0 $y1 $x0 $y0
+EOF
+	i=`expr $i + 1`
+done
