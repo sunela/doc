@@ -1,0 +1,12 @@
+Sunela Documentation
+====================
+
+This repository contains documentation for the Sunela project. Right now, it is
+limited to organizing screenshots obtained from the simulator.
+
+All files that are not considered code, such as documents and drawings are
+licensed under Creative Commons CC-BY-4.0, see LICENSE.CC-BY for more
+information.
+
+Code, such as scripts and Makefile, is distributed under the terms of the MIT
+License. See COPYING.MIT for more details.
