@@ -6,9 +6,16 @@
 # A copy of the license can be found in the file LICENSE.MIT
 #
 
-.PHONY:		all pages clean
+TESTS = ../fw/tests
 
-all:		pages.pdf gallery.pdf
+
+.PHONY:		all links pages clean
+
+all:		links pages.pdf gallery.pdf
+
+links:
+		for n in `$(TESTS)/pages.sh names`; do \
+		    ln -sf $(TESTS)/$$n.png . || exit 1; done
 
 gallery.fig:	mkgallery
 		./mkgallery >$@ || { rm -f $@; exit 1; }
@@ -24,6 +31,7 @@ gallery.fig:	mkgallery
 #
 
 pages:
-		../fw/tests/pages.sh store
+		$(TESTS)/pages.sh store
 
 clean:
+		for n in `$(TESTS)/pages.sh names`; do rm -f $$n.png; done
